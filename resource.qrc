@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/image">
+        <file>res/background.png</file>
+        <file>res/Normal_Bird.png</file>
+        <file>res/stick.png</file>
+        <file>res/arrow.png</file>
+    </qresource>
+</RCC>
