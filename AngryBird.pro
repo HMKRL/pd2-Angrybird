@@ -18,13 +18,17 @@ SOURCES += main.cpp\
     gameitem.cpp \
     movepoint.cpp \
     bird.cpp \
-    planet.cpp
+    planet.cpp \
+    land.cpp \
+    contectlistener.cpp
 
 HEADERS  += mainwindow.h \
     gameitem.h \
     movepoint.h \
     bird.h \
-    planet.h
+    planet.h \
+    land.h \
+    contectlistener.h
 
 FORMS    += mainwindow.ui
 

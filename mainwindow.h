@@ -3,12 +3,17 @@
 
 #define x_0 144
 #define y_0 490
+#define meter_x0 7.15f
+#define meter_y0 15.5f
 #define PI 3.1415926
 
 #include "movepoint.h"
 #include "gameitem.h"
 #include "bird.h"
 #include "planet.h"
+#include "land.h"
+#include "contectlistener.h"
+
 #include <QMainWindow>
 #include <QDebug>
 #include <Box2D/Box2D.h>
@@ -53,6 +58,8 @@ private:
     Bird *b1;
     bool pressed;
     QGraphicsPixmapItem *arrow;
+    void addStaticItems();
+    ContectListener *arcane_ear;
 };
 
 #endif // MAINWINDOW_H

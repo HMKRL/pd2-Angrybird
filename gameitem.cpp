@@ -28,7 +28,7 @@ void GameItem::paintPixmap()
     pixmap.setRotation(-body->GetAngle()*180/PI);
     float dist = qSqrt(qPow(bodypos.x - 39.75, 2) + qPow(bodypos.y - 18.7, 2));
     if(dist < 25.55) {
-        b2Vec2 gravity = b2Vec2((39.75 - bodypos.x) / dist * 120, (18.7 - bodypos.y) / dist * 120);
+        b2Vec2 gravity = b2Vec2((39.75 - bodypos.x) / dist * 145, (18.7 - bodypos.y) / dist * 145);
         body->ApplyForceToCenter(gravity, true);
     }
 }

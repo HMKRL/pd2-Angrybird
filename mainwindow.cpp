@@ -13,13 +13,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //create a world without gravity, gravity will provide by planets.
     world = new b2World(b2Vec2(0.0f, 0.0f));
+    arcane_ear = new ContectListener;
+    world->SetContactListener(arcane_ear);
     world_meter = QSizeF(64, 40);
     world_pixel = ui->graphicsView->size();
     GameItem::setGlobalSize(world_meter, world_pixel);
     MovePoint::setGlobalSize(world_meter, world_pixel);
-    Planet *p1 = new Planet(7.2f, 6.75f, 4.375f, world);
-    Planet *p2 = new Planet(39.75f, 18.7f, 6.3f, world);
-    b1 = new Bird(7.15f, 15.5f, 1.0f, &timer, world, scene, QPixmap(":/image/res/Normal_Bird.png"));
+    addStaticItems();
+    b1 = new Bird(meter_x0, meter_y0, 1.0f, &timer, world, scene, QPixmap(":/image/res/Normal_Bird.png"));
 
     //bird shoot arrow
     arrow = new QGraphicsPixmapItem;
@@ -57,7 +58,7 @@ bool MainWindow::eventFilter(QObject*, QEvent *event)
         arrow->setVisible(false);
         pressed = false;
         dragstop = static_cast<QMouseEvent*>(event)->pos();
-        b1->setLinearVelocity(b2Vec2((dragstart.x()-dragstop.x())/30,-(dragstart.y()-dragstop.y())/30));
+        b1->setLinearVelocity(b2Vec2((dragstart.x()-dragstop.x())/40,-(dragstart.y()-dragstop.y())/40));
     }
     else if(pressed && event->type() == QEvent::MouseMove) {
         QPointF temp = static_cast<QMouseEvent*>(event)->pos();
@@ -74,4 +75,15 @@ void MainWindow::tick()
 {
     world->Step(1.0/60.0, 6, 2);
     scene->update();
+}
+
+void MainWindow::addStaticItems()
+{
+    Planet *p1 = new Planet(7.2f, 6.75f, 4.375f, world);
+    Planet *p2 = new Planet(39.75f, 18.7f, 6.3f, world);
+    Land *l1 = new Land(40.15f, 25.4f, 2.1f, 0.01f, 0.0f, world);
+    Land *l2 = new Land(44.82f, 22.9f, 3.52f, 0.01f, -44.0f, world);
+    Land *l3 = new Land(45.95f, 16.63f, 3.62f, 0.02f, 70.5f, world);
+    Land *l4 = new Land(43.9f, 13.03f, 0.6f, 0.02f, -30.0f, world);
+    Land *l5 = new Land(37.8f, 25.15f, 0.3f, 0.02f, 45.0f, world);
 }

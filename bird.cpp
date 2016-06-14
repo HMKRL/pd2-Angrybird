@@ -28,6 +28,8 @@ Bird::Bird(float x, float y, float radius, QTimer *timer, b2World *world, QGraph
 
     size.setHeight(radius*2);
     size.setWidth(radius*2);
+
+    HP = 8763;
 }
 
 Bird::Bird(QPointF pos, float radius, QTimer *timer, b2World *world, QGraphicsScene *scene, QPixmap birdpix):GameItem(world)
@@ -58,9 +60,18 @@ Bird::Bird(QPointF pos, float radius, QTimer *timer, b2World *world, QGraphicsSc
 
     size.setHeight(radius*2);
     size.setWidth(radius*2);
+
+    HP = 8763;
 }
 
 void Bird::setLinearVelocity(b2Vec2 velocity)
 {
     body->SetLinearVelocity(velocity);
+}
+
+void Bird::crash()
+{
+    qDebug() << "HP:" << HP << "->" << HP-2000;
+    HP -= 2000;
+    if(HP <= 0) delete this;
 }
