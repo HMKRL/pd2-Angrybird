@@ -48,7 +48,7 @@ void MainWindow::closeEvent(QCloseEvent*)
 void MainWindow::mousePressEvent(QMouseEvent *event)
 {
     dragstart = event->pos();
-    qDebug() << MovePoint::pixel2meter(event->pos());
+    //qDebug() << MovePoint::pixel2meter(event->pos());
     pressed = true;
 }
 
@@ -86,4 +86,8 @@ void MainWindow::addStaticItems()
     Land *l3 = new Land(45.95f, 16.63f, 3.62f, 0.02f, 70.5f, world);
     Land *l4 = new Land(43.9f, 13.03f, 0.6f, 0.02f, -30.0f, world);
     Land *l5 = new Land(37.8f, 25.15f, 0.3f, 0.02f, 45.0f, world);
+    Block *B = new Block(40.0f, 28.0f, 2.0f, 2.0f, 0.0f, Block::Wood, world, scene, &timer);
+    Block *B2 = new Block(46.5f, 23.7f, 2.0f, 2.0f, -44.0f, Block::Wood, world, scene, &timer);
+    Block *B3 = new Block(40.0f, 32.0f, 2.0f, 2.0f, 0.0f, Block::Wood, world, scene, &timer);
+    Block *B4 = new Block(40.0f, 36.0f, 2.0f, 2.0f, 0.0f, Block::Wood, world, scene, &timer);
 }

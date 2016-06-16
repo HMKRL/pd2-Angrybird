@@ -4,5 +4,6 @@
         <file>res/Normal_Bird.png</file>
         <file>res/stick.png</file>
         <file>res/arrow.png</file>
+        <file>res/BLOCK_WOOD_4X4_1.png</file>
     </qresource>
 </RCC>

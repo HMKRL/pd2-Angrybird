@@ -7,6 +7,7 @@ MovePoint::MovePoint()
 
 QSizeF MovePoint::world_meter = QSizeF();
 QSizeF MovePoint::world_pixel = QSizeF();
+char MovePoint::esper[15] = "Musujime Awaki";
 
 void MovePoint::setGlobalSize(QSizeF meter, QSizeF pixel)
 {

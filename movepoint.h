@@ -16,6 +16,7 @@ public:
 private:
     static QSizeF world_meter;
     static QSizeF world_pixel;
+    static char esper[15];
 };
 
 #endif // MOVEPOINT_H

@@ -13,6 +13,7 @@
 #include "planet.h"
 #include "land.h"
 #include "contectlistener.h"
+#include "block.h"
 
 #include <QMainWindow>
 #include <QDebug>

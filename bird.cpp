@@ -69,9 +69,12 @@ void Bird::setLinearVelocity(b2Vec2 velocity)
     body->SetLinearVelocity(velocity);
 }
 
-void Bird::crash()
+void Bird::collision()
 {
-    qDebug() << "HP:" << HP << "->" << HP-2000;
-    HP -= 2000;
-    if(HP <= 0) delete this;
+    /*b2Vec2 speed = body->GetLinearVelocity();
+    float V = qSqrt(qPow(speed.x, 2) + qPow(speed.y, 2));
+    qDebug() << "Bird hit";
+    qDebug() << "HP :" << HP << "->" << HP - 200 * V;
+    HP = HP - 200 * V;
+    if(HP <= 0) pixmap.setVisible(false);*/
 }

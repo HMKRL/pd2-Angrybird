@@ -20,6 +20,7 @@ public:
     GameItem(b2World *world);
     ~GameItem();
     static void setGlobalSize(QSizeF Meter, QSizeF Pixel);
+    virtual void collision();
 
 public slots:
     void paintPixmap();
@@ -29,10 +30,13 @@ protected:
     b2Body *body;
     QGraphicsPixmapItem pixmap;
     QSizeF size;
+    float HP;
 
     static QSizeF world_meter;
     static QSizeF world_pixel;
 
+private:
+    void burstTheGravity(b2Vec2 bodypos);
 };
 
 #endif // GAMEITEM_H

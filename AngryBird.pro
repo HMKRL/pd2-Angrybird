@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     bird.cpp \
     planet.cpp \
     land.cpp \
-    contectlistener.cpp
+    contectlistener.cpp \
+    block.cpp
 
 HEADERS  += mainwindow.h \
     gameitem.h \
@@ -28,7 +29,8 @@ HEADERS  += mainwindow.h \
     bird.h \
     planet.h \
     land.h \
-    contectlistener.h
+    contectlistener.h \
+    block.h
 
 FORMS    += mainwindow.ui
 
