@@ -22,7 +22,7 @@ Bird::Bird(float x, float y, float radius, QTimer *timer, b2World *world, QGraph
 
     connect(timer, SIGNAL(timeout()), this, SLOT(paintPixmap()));
 
-    pixmap.setPixmap(birdpix.scaled(40, 40));
+    pixmap.setPixmap(birdpix.scaled(radius*2*20, radius*2*20));
     pixmap.setTransformOriginPoint(pixmap.boundingRect().width()/2,pixmap.boundingRect().height()/2);
     scene->addItem(&pixmap);
 
@@ -46,7 +46,7 @@ Bird::Bird(QPointF pos, float radius, QTimer *timer, b2World *world, QGraphicsSc
 
     b2FixtureDef fixturedef;
     fixturedef.shape = &bodyshape;
-    fixturedef.density = 5.0f;
+    fixturedef.density = 8.0f;
     fixturedef.friction = 0.2f;
     fixturedef.restitution = 0.4f;
     body->SetAngularDamping(3);

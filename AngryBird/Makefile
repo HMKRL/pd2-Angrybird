@@ -12,10 +12,10 @@ MAKEFILE      = Makefile
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_QML_DEBUG -DQT_MULTIMEDIA_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -g -std=gnu++0x -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I../../AngryBird -I. -I../../Qt5.6.0/5.6/gcc_64/include -I../../Qt5.6.0/5.6/gcc_64/include/QtWidgets -I../../Qt5.6.0/5.6/gcc_64/include/QtGui -I../../Qt5.6.0/5.6/gcc_64/include/QtCore -I. -I. -I../../Qt5.6.0/5.6/gcc_64/mkspecs/linux-g++
+INCPATH       = -I../../AngryBird -I. -I../../Qt5.6.0/5.6/gcc_64/include -I../../Qt5.6.0/5.6/gcc_64/include/QtMultimedia -I../../Qt5.6.0/5.6/gcc_64/include/QtWidgets -I../../Qt5.6.0/5.6/gcc_64/include/QtGui -I../../Qt5.6.0/5.6/gcc_64/include/QtNetwork -I../../Qt5.6.0/5.6/gcc_64/include/QtCore -I. -I. -I../../Qt5.6.0/5.6/gcc_64/mkspecs/linux-g++
 QMAKE         = /home/hmkrl/Qt5.6.0/5.6/gcc_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -36,7 +36,7 @@ DISTNAME      = AngryBird1.0.0
 DISTDIR = /home/hmkrl/AngryBird/AngryBird/.tmp/AngryBird1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-z,origin -Wl,-rpath,\$$ORIGIN -Wl,-rpath,/home/hmkrl/Qt5.6.0/5.6/gcc_64/lib
-LIBS          = $(SUBLIBS) -lBox2D -L/home/hmkrl/Qt5.6.0/5.6/gcc_64/lib -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
+LIBS          = $(SUBLIBS) -lBox2D -L/home/hmkrl/Qt5.6.0/5.6/gcc_64/lib -lQt5Multimedia -lQt5Widgets -lQt5Gui -lQt5Network -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -368,8 +368,10 @@ Makefile: ../AngryBird.pro ../../Qt5.6.0/5.6/gcc_64/mkspecs/features/spec_pre.pr
 		../../Qt5.6.0/5.6/gcc_64/mkspecs/features/lex.prf \
 		../AngryBird.pro \
 		../resource.qrc \
+		../../Qt5.6.0/5.6/gcc_64/lib/libQt5Multimedia.prl \
 		../../Qt5.6.0/5.6/gcc_64/lib/libQt5Widgets.prl \
 		../../Qt5.6.0/5.6/gcc_64/lib/libQt5Gui.prl \
+		../../Qt5.6.0/5.6/gcc_64/lib/libQt5Network.prl \
 		../../Qt5.6.0/5.6/gcc_64/lib/libQt5Core.prl
 	$(QMAKE) -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug -o Makefile ../AngryBird.pro
 ../../Qt5.6.0/5.6/gcc_64/mkspecs/features/spec_pre.prf:
@@ -508,8 +510,10 @@ Makefile: ../AngryBird.pro ../../Qt5.6.0/5.6/gcc_64/mkspecs/features/spec_pre.pr
 ../../Qt5.6.0/5.6/gcc_64/mkspecs/features/lex.prf:
 ../AngryBird.pro:
 ../resource.qrc:
+../../Qt5.6.0/5.6/gcc_64/lib/libQt5Multimedia.prl:
 ../../Qt5.6.0/5.6/gcc_64/lib/libQt5Widgets.prl:
 ../../Qt5.6.0/5.6/gcc_64/lib/libQt5Gui.prl:
+../../Qt5.6.0/5.6/gcc_64/lib/libQt5Network.prl:
 ../../Qt5.6.0/5.6/gcc_64/lib/libQt5Core.prl:
 qmake: FORCE
 	@$(QMAKE) -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug -o Makefile ../AngryBird.pro
@@ -553,11 +557,29 @@ compiler_rcc_make_all: qrc_resource.cpp
 compiler_rcc_clean:
 	-$(DEL_FILE) qrc_resource.cpp
 qrc_resource.cpp: ../resource.qrc \
+		../res/SMOKE_CLOUD_3.png \
+		../res/SMOKE_CLOUD_2.png \
+		../res/SMOKE_CLOUD_6.png \
+		../res/SMOKE_CLOUD_1.png \
+		../res/SMOKE_CLOUD_5.png \
+		../res/SMOKE_CLOUD_4.png \
 		../res/stick.png \
+		../res/BLOCK_ROCK_4X4_4.png \
 		../res/Normal_Bird.png \
+		../res/BLOCK_WOOD_4X4_3.png \
+		../res/BLOCK_LIGHT_4X4_1.png \
 		../res/background.png \
+		../res/BLOCK_ROCK_4X4_3.png \
+		../res/BLOCK_WOOD_4X4_2.png \
+		../res/BLOCK_LIGHT_4X4_4.png \
+		../res/BLOCK_ROCK_4X4_2.png \
 		../res/BLOCK_WOOD_4X4_1.png \
-		../res/arrow.png
+		../res/BLOCK_LIGHT_4X4_3.png \
+		../res/BLOCK_ROCK_4X4_1.png \
+		../res/arrow.png \
+		../res/BLOCK_WOOD_4X4_4.png \
+		../res/BLOCK_LIGHT_4X4_2.png \
+		../res/glass_break.wav
 	/home/hmkrl/Qt5.6.0/5.6/gcc_64/bin/rcc -name resource ../resource.qrc -o qrc_resource.cpp
 
 compiler_moc_header_make_all: moc_mainwindow.cpp moc_gameitem.cpp
@@ -664,6 +686,8 @@ moc_mainwindow.cpp: ../movepoint.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtGui/qfontinfo.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtGui/qfont.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtGui/qfontmetrics.h \
+		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QThread \
+		../../Qt5.6.0/5.6/gcc_64/include/QtCore/qthread.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtGui/QTransform \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QtMath \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/qmath.h \
@@ -673,6 +697,10 @@ moc_mainwindow.cpp: ../movepoint.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/qbasictimer.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QGraphicsScene \
 		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qgraphicsscene.h \
+		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QString \
+		../../Qt5.6.0/5.6/gcc_64/include/QtMultimedia/QSound \
+		../../Qt5.6.0/5.6/gcc_64/include/QtMultimedia/qsound.h \
+		../../Qt5.6.0/5.6/gcc_64/include/QtMultimedia/qtmultimediadefs.h \
 		../bird.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QDebug \
 		../planet.h \
@@ -698,8 +726,9 @@ moc_mainwindow.cpp: ../movepoint.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QEvent \
 		../../Qt5.6.0/5.6/gcc_64/include/QtGui/QMouseEvent \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QList \
+		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QVector \
 		../mainwindow.h
-	/home/hmkrl/Qt5.6.0/5.6/gcc_64/bin/moc $(DEFINES) -I/home/hmkrl/Qt5.6.0/5.6/gcc_64/mkspecs/linux-g++ -I/home/hmkrl/AngryBird -I/home/hmkrl/Qt5.6.0/5.6/gcc_64/include -I/home/hmkrl/Qt5.6.0/5.6/gcc_64/include/QtWidgets -I/home/hmkrl/Qt5.6.0/5.6/gcc_64/include/QtGui -I/home/hmkrl/Qt5.6.0/5.6/gcc_64/include/QtCore -I. ../mainwindow.h -o moc_mainwindow.cpp
+	/home/hmkrl/Qt5.6.0/5.6/gcc_64/bin/moc $(DEFINES) -I/home/hmkrl/Qt5.6.0/5.6/gcc_64/mkspecs/linux-g++ -I/home/hmkrl/AngryBird -I/home/hmkrl/Qt5.6.0/5.6/gcc_64/include -I/home/hmkrl/Qt5.6.0/5.6/gcc_64/include/QtMultimedia -I/home/hmkrl/Qt5.6.0/5.6/gcc_64/include/QtWidgets -I/home/hmkrl/Qt5.6.0/5.6/gcc_64/include/QtGui -I/home/hmkrl/Qt5.6.0/5.6/gcc_64/include/QtNetwork -I/home/hmkrl/Qt5.6.0/5.6/gcc_64/include/QtCore -I. ../mainwindow.h -o moc_mainwindow.cpp
 
 moc_gameitem.cpp: ../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QGraphicsPixmapItem \
 		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qgraphicsitem.h \
@@ -799,6 +828,8 @@ moc_gameitem.cpp: ../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QGraphicsPixmapItem
 		../../Qt5.6.0/5.6/gcc_64/include/QtGui/qfontinfo.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtGui/qfont.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtGui/qfontmetrics.h \
+		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QThread \
+		../../Qt5.6.0/5.6/gcc_64/include/QtCore/qthread.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtGui/QTransform \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QtMath \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/qmath.h \
@@ -808,8 +839,12 @@ moc_gameitem.cpp: ../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QGraphicsPixmapItem
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/qbasictimer.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QGraphicsScene \
 		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qgraphicsscene.h \
+		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QString \
+		../../Qt5.6.0/5.6/gcc_64/include/QtMultimedia/QSound \
+		../../Qt5.6.0/5.6/gcc_64/include/QtMultimedia/qsound.h \
+		../../Qt5.6.0/5.6/gcc_64/include/QtMultimedia/qtmultimediadefs.h \
 		../gameitem.h
-	/home/hmkrl/Qt5.6.0/5.6/gcc_64/bin/moc $(DEFINES) -I/home/hmkrl/Qt5.6.0/5.6/gcc_64/mkspecs/linux-g++ -I/home/hmkrl/AngryBird -I/home/hmkrl/Qt5.6.0/5.6/gcc_64/include -I/home/hmkrl/Qt5.6.0/5.6/gcc_64/include/QtWidgets -I/home/hmkrl/Qt5.6.0/5.6/gcc_64/include/QtGui -I/home/hmkrl/Qt5.6.0/5.6/gcc_64/include/QtCore -I. ../gameitem.h -o moc_gameitem.cpp
+	/home/hmkrl/Qt5.6.0/5.6/gcc_64/bin/moc $(DEFINES) -I/home/hmkrl/Qt5.6.0/5.6/gcc_64/mkspecs/linux-g++ -I/home/hmkrl/AngryBird -I/home/hmkrl/Qt5.6.0/5.6/gcc_64/include -I/home/hmkrl/Qt5.6.0/5.6/gcc_64/include/QtMultimedia -I/home/hmkrl/Qt5.6.0/5.6/gcc_64/include/QtWidgets -I/home/hmkrl/Qt5.6.0/5.6/gcc_64/include/QtGui -I/home/hmkrl/Qt5.6.0/5.6/gcc_64/include/QtNetwork -I/home/hmkrl/Qt5.6.0/5.6/gcc_64/include/QtCore -I. ../gameitem.h -o moc_gameitem.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -931,6 +966,8 @@ main.o: ../main.cpp ../mainwindow.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtGui/qfontinfo.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtGui/qfont.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtGui/qfontmetrics.h \
+		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QThread \
+		../../Qt5.6.0/5.6/gcc_64/include/QtCore/qthread.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtGui/QTransform \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QtMath \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/qmath.h \
@@ -940,6 +977,10 @@ main.o: ../main.cpp ../mainwindow.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/qbasictimer.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QGraphicsScene \
 		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qgraphicsscene.h \
+		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QString \
+		../../Qt5.6.0/5.6/gcc_64/include/QtMultimedia/QSound \
+		../../Qt5.6.0/5.6/gcc_64/include/QtMultimedia/qsound.h \
+		../../Qt5.6.0/5.6/gcc_64/include/QtMultimedia/qtmultimediadefs.h \
 		../bird.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QDebug \
 		../planet.h \
@@ -965,6 +1006,7 @@ main.o: ../main.cpp ../mainwindow.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QEvent \
 		../../Qt5.6.0/5.6/gcc_64/include/QtGui/QMouseEvent \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QList \
+		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QVector \
 		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QApplication \
 		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qapplication.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/qcoreapplication.h \
@@ -1077,6 +1119,8 @@ mainwindow.o: ../mainwindow.cpp ../mainwindow.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtGui/qfontinfo.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtGui/qfont.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtGui/qfontmetrics.h \
+		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QThread \
+		../../Qt5.6.0/5.6/gcc_64/include/QtCore/qthread.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtGui/QTransform \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QtMath \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/qmath.h \
@@ -1086,6 +1130,10 @@ mainwindow.o: ../mainwindow.cpp ../mainwindow.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/qbasictimer.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QGraphicsScene \
 		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qgraphicsscene.h \
+		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QString \
+		../../Qt5.6.0/5.6/gcc_64/include/QtMultimedia/QSound \
+		../../Qt5.6.0/5.6/gcc_64/include/QtMultimedia/qsound.h \
+		../../Qt5.6.0/5.6/gcc_64/include/QtMultimedia/qtmultimediadefs.h \
 		../bird.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QDebug \
 		../planet.h \
@@ -1111,43 +1159,8 @@ mainwindow.o: ../mainwindow.cpp ../mainwindow.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QEvent \
 		../../Qt5.6.0/5.6/gcc_64/include/QtGui/QMouseEvent \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QList \
-		ui_mainwindow.h \
-		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QVariant \
-		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QAction \
-		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qaction.h \
-		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qactiongroup.h \
-		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QApplication \
-		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qapplication.h \
-		../../Qt5.6.0/5.6/gcc_64/include/QtCore/qcoreapplication.h \
-		../../Qt5.6.0/5.6/gcc_64/include/QtCore/qeventloop.h \
-		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qdesktopwidget.h \
-		../../Qt5.6.0/5.6/gcc_64/include/QtGui/qguiapplication.h \
-		../../Qt5.6.0/5.6/gcc_64/include/QtGui/qinputmethod.h \
-		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QButtonGroup \
-		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qbuttongroup.h \
-		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QGraphicsView \
-		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qgraphicsview.h \
-		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qscrollarea.h \
-		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractscrollarea.h \
-		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qframe.h \
-		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QHeaderView \
-		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qheaderview.h \
-		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractitemview.h \
-		../../Qt5.6.0/5.6/gcc_64/include/QtCore/qabstractitemmodel.h \
-		../../Qt5.6.0/5.6/gcc_64/include/QtCore/qitemselectionmodel.h \
-		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
-		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qstyleoption.h \
-		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractspinbox.h \
-		../../Qt5.6.0/5.6/gcc_64/include/QtGui/qvalidator.h \
-		../../Qt5.6.0/5.6/gcc_64/include/QtCore/qregularexpression.h \
-		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qslider.h \
-		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractslider.h \
-		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qstyle.h \
-		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtabbar.h \
-		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qrubberband.h \
-		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QLabel \
-		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qlabel.h \
-		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QWidget
+		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QVector \
+		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../mainwindow.cpp
 
 gameitem.o: ../gameitem.cpp ../movepoint.h \
@@ -1396,6 +1409,8 @@ bird.o: ../bird.cpp ../bird.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtGui/qfontinfo.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtGui/qfont.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtGui/qfontmetrics.h \
+		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QThread \
+		../../Qt5.6.0/5.6/gcc_64/include/QtCore/qthread.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtGui/QTransform \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QtMath \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/qmath.h \
@@ -1405,6 +1420,10 @@ bird.o: ../bird.cpp ../bird.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/qbasictimer.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QGraphicsScene \
 		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qgraphicsscene.h \
+		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QString \
+		../../Qt5.6.0/5.6/gcc_64/include/QtMultimedia/QSound \
+		../../Qt5.6.0/5.6/gcc_64/include/QtMultimedia/qsound.h \
+		../../Qt5.6.0/5.6/gcc_64/include/QtMultimedia/qtmultimediadefs.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bird.o ../bird.cpp
 
@@ -1508,6 +1527,8 @@ planet.o: ../planet.cpp ../planet.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtGui/qfontinfo.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtGui/qfont.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtGui/qfontmetrics.h \
+		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QThread \
+		../../Qt5.6.0/5.6/gcc_64/include/QtCore/qthread.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtGui/QTransform \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QtMath \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/qmath.h \
@@ -1516,7 +1537,11 @@ planet.o: ../planet.cpp ../planet.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/qtimer.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/qbasictimer.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QGraphicsScene \
-		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qgraphicsscene.h
+		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qgraphicsscene.h \
+		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QString \
+		../../Qt5.6.0/5.6/gcc_64/include/QtMultimedia/QSound \
+		../../Qt5.6.0/5.6/gcc_64/include/QtMultimedia/qsound.h \
+		../../Qt5.6.0/5.6/gcc_64/include/QtMultimedia/qtmultimediadefs.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o planet.o ../planet.cpp
 
 land.o: ../land.cpp ../land.h \
@@ -1619,6 +1644,8 @@ land.o: ../land.cpp ../land.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtGui/qfontinfo.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtGui/qfont.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtGui/qfontmetrics.h \
+		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QThread \
+		../../Qt5.6.0/5.6/gcc_64/include/QtCore/qthread.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtGui/QTransform \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QtMath \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/qmath.h \
@@ -1628,6 +1655,10 @@ land.o: ../land.cpp ../land.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/qbasictimer.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QGraphicsScene \
 		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qgraphicsscene.h \
+		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QString \
+		../../Qt5.6.0/5.6/gcc_64/include/QtMultimedia/QSound \
+		../../Qt5.6.0/5.6/gcc_64/include/QtMultimedia/qsound.h \
+		../../Qt5.6.0/5.6/gcc_64/include/QtMultimedia/qtmultimediadefs.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o land.o ../land.cpp
 
@@ -1732,6 +1763,8 @@ contectlistener.o: ../contectlistener.cpp ../contectlistener.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtGui/qfontinfo.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtGui/qfont.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtGui/qfontmetrics.h \
+		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QThread \
+		../../Qt5.6.0/5.6/gcc_64/include/QtCore/qthread.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtGui/QTransform \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QtMath \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/qmath.h \
@@ -1741,6 +1774,10 @@ contectlistener.o: ../contectlistener.cpp ../contectlistener.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/qbasictimer.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QGraphicsScene \
 		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qgraphicsscene.h \
+		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QString \
+		../../Qt5.6.0/5.6/gcc_64/include/QtMultimedia/QSound \
+		../../Qt5.6.0/5.6/gcc_64/include/QtMultimedia/qsound.h \
+		../../Qt5.6.0/5.6/gcc_64/include/QtMultimedia/qtmultimediadefs.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o contectlistener.o ../contectlistener.cpp
 
@@ -1844,6 +1881,8 @@ block.o: ../block.cpp ../block.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtGui/qfontinfo.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtGui/qfont.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtGui/qfontmetrics.h \
+		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QThread \
+		../../Qt5.6.0/5.6/gcc_64/include/QtCore/qthread.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtGui/QTransform \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QtMath \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/qmath.h \
@@ -1853,6 +1892,10 @@ block.o: ../block.cpp ../block.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/qbasictimer.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QGraphicsScene \
 		../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qgraphicsscene.h \
+		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QString \
+		../../Qt5.6.0/5.6/gcc_64/include/QtMultimedia/QSound \
+		../../Qt5.6.0/5.6/gcc_64/include/QtMultimedia/qsound.h \
+		../../Qt5.6.0/5.6/gcc_64/include/QtMultimedia/qtmultimediadefs.h \
 		../../Qt5.6.0/5.6/gcc_64/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o block.o ../block.cpp
 

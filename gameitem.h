@@ -5,11 +5,14 @@
 #include <QGraphicsPixmapItem>
 #include <QSizeF>
 #include <QPainter>
+#include <QThread>
 #include <QTransform>
 #include <QtMath>
 #include <QObject>
 #include <QTimer>
 #include <QGraphicsScene>
+#include <QString>
+#include <QSound>
 
 #define PI 3.1415926
 
@@ -21,6 +24,9 @@ public:
     ~GameItem();
     static void setGlobalSize(QSizeF Meter, QSizeF Pixel);
     virtual void collision();
+    bool toDelete;
+    float HP;
+    float MAX_HP;
 
 public slots:
     void paintPixmap();
@@ -30,7 +36,6 @@ protected:
     b2Body *body;
     QGraphicsPixmapItem pixmap;
     QSizeF size;
-    float HP;
 
     static QSizeF world_meter;
     static QSizeF world_pixel;

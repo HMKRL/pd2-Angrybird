@@ -4,10 +4,12 @@
 
 GameItem::GameItem(b2World *world):world(world), body(NULL)
 {
+    toDelete = false;
 }
 
 GameItem::~GameItem()
 {
+    pixmap.setPixmap(QPixmap(":/animation/res/SMOKE_CLOUD_6.png"));
     world->DestroyBody(body);
 }
 
@@ -22,7 +24,6 @@ void GameItem::setGlobalSize(QSizeF Meter, QSizeF Pixel)
 
 void GameItem::collision()
 {
-    qDebug() << "Base hit";
 }
 
 void GameItem::paintPixmap()

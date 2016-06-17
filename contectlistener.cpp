@@ -8,9 +8,8 @@ ContectListener::ContectListener()
 
 void ContectListener::BeginContact(b2Contact *contact)
 {
-    qDebug() << "Begin";
-    static_cast<GameItem*>(contact->GetFixtureA()->GetBody()->GetUserData())->collision();
-    static_cast<GameItem*>(contact->GetFixtureB()->GetBody()->GetUserData())->collision();
+    //qDebug() << "Begin";
+
     /*if(contact->GetFixtureA()->GetBody()->GetType() == b2_dynamicBody) {
         void* temp = contact->GetFixtureA()->GetBody()->GetUserData();
         static_cast<GameItem*>(temp)->collision();
@@ -23,7 +22,9 @@ void ContectListener::BeginContact(b2Contact *contact)
 
 void ContectListener::EndContact(b2Contact *contact)
 {
-    qDebug() << "End";
+    //qDebug() << "End";
+    static_cast<GameItem*>(contact->GetFixtureA()->GetBody()->GetUserData())->collision();
+    static_cast<GameItem*>(contact->GetFixtureB()->GetBody()->GetUserData())->collision();
 }
 
 void ContectListener::PreSolve(b2Contact *contact, const b2Manifold *Manifold)

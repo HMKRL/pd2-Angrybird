@@ -24,6 +24,7 @@
 #include <QTimer>
 #include <QList>
 #include <QEvent>
+#include <QVector>
 
 namespace Ui {
 class MainWindow;
@@ -39,6 +40,7 @@ public:
     void closeEvent(QCloseEvent*);
     void mousePressEvent(QMouseEvent *event);
     bool eventFilter(QObject *,QEvent *event);
+    QVector<GameItem*> ITEM;
 
 signals:
     void quitGame();
@@ -50,7 +52,6 @@ private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
     b2World *world;
-    QList<GameItem *> itemList;
     QTimer timer;
     QSizeF world_meter;
     QSizeF world_pixel;
@@ -61,6 +62,7 @@ private:
     QGraphicsPixmapItem *arrow;
     void addStaticItems();
     ContectListener *arcane_ear;
+    void deleteItem();
 };
 
 #endif // MAINWINDOW_H
