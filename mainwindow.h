@@ -14,6 +14,9 @@
 #include "land.h"
 #include "contectlistener.h"
 #include "block.h"
+#include "enemy.h"
+#include "yellowbird.h"
+#include "blackbird.h"
 
 #include <QMainWindow>
 #include <QDebug>
@@ -25,6 +28,7 @@
 #include <QList>
 #include <QEvent>
 #include <QVector>
+#include <QQueue>
 
 namespace Ui {
 class MainWindow;
@@ -41,6 +45,7 @@ public:
     void mousePressEvent(QMouseEvent *event);
     bool eventFilter(QObject *,QEvent *event);
     QVector<GameItem*> ITEM;
+    QQueue<Bird*> BIRD;
 
 signals:
     void quitGame();
@@ -57,7 +62,6 @@ private:
     QSizeF world_pixel;
     QPointF dragstart;
     QPointF dragstop;
-    Bird *b1;
     bool pressed;
     QGraphicsPixmapItem *arrow;
     void addStaticItems();

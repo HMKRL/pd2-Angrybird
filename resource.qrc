@@ -16,6 +16,21 @@
         <file>res/BLOCK_LIGHT_4X4_3.png</file>
         <file>res/BLOCK_LIGHT_4X4_2.png</file>
         <file>res/BLOCK_LIGHT_4X4_1.png</file>
+        <file>res/BLOCK_WOOD_10X1_4.png</file>
+        <file>res/BLOCK_WOOD_10X1_3.png</file>
+        <file>res/BLOCK_WOOD_10X1_2.png</file>
+        <file>res/BLOCK_WOOD_10X1_1.png</file>
+        <file>res/BLOCK_ROCK_10X1_4.png</file>
+        <file>res/BLOCK_ROCK_10X1_3.png</file>
+        <file>res/BLOCK_ROCK_10X1_2.png</file>
+        <file>res/BLOCK_ROCK_10X1_1.png</file>
+        <file>res/BLOCK_LIGHT_10X1_4.png</file>
+        <file>res/BLOCK_LIGHT_10X1_3.png</file>
+        <file>res/BLOCK_LIGHT_10X1_2.png</file>
+        <file>res/BLOCK_LIGHT_10X1_1.png</file>
+        <file>res/PIG.png</file>
+        <file>res/yellow_bird.png</file>
+        <file>res/BIRD_Black.png</file>
     </qresource>
     <qresource prefix="/animation">
         <file>res/SMOKE_CLOUD_6.png</file>
@@ -27,5 +42,7 @@
     </qresource>
     <qresource prefix="/sound">
         <file>res/glass_break.wav</file>
+        <file>res/wood_break.wav</file>
+        <file>res/stone_break.wav</file>
     </qresource>
 </RCC>

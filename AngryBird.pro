@@ -21,7 +21,10 @@ SOURCES += main.cpp\
     planet.cpp \
     land.cpp \
     contectlistener.cpp \
-    block.cpp
+    block.cpp \
+    enemy.cpp \
+    yellowbird.cpp \
+    blackbird.cpp
 
 HEADERS  += mainwindow.h \
     gameitem.h \
@@ -30,7 +33,10 @@ HEADERS  += mainwindow.h \
     planet.h \
     land.h \
     contectlistener.h \
-    block.h
+    block.h \
+    enemy.h \
+    yellowbird.h \
+    blackbird.h
 
 FORMS    += mainwindow.ui
 

@@ -5,11 +5,12 @@
 GameItem::GameItem(b2World *world):world(world), body(NULL)
 {
     toDelete = false;
+    launched = false;
+    bumped = false;
 }
 
 GameItem::~GameItem()
 {
-    pixmap.setPixmap(QPixmap(":/animation/res/SMOKE_CLOUD_6.png"));
     world->DestroyBody(body);
 }
 
@@ -26,6 +27,12 @@ void GameItem::collision()
 {
 }
 
+void GameItem::setVisible(bool vis)
+{
+    pixmap.setVisible(vis);
+    body->GetFixtureList()->SetSensor(!vis);
+}
+
 void GameItem::paintPixmap()
 {
     b2Vec2 bodypos = body->GetPosition();
@@ -33,13 +40,20 @@ void GameItem::paintPixmap()
     pixmap.setPos(pos.x(), pos.y());
     pixmap.setRotation(-body->GetAngle()*180/PI);
     burstTheGravity(bodypos);
+    if((bodypos.x > 64 || bodypos.x < 0)||(bodypos.y > 40 || bodypos.y < 0)) toDelete = true;
+    if(HP == 0xc8763) {
+        b2Vec2 speed = body->GetLinearVelocity();
+        if(qFabs(speed.x) < 10e-7 && qFabs(speed.y) < 10e-7 && launched) {
+            toDelete = true;
+        }
+    }
 }
 
 void GameItem::burstTheGravity(b2Vec2 bodypos)
 {
     float dist = qSqrt(qPow(bodypos.x - 39.75, 2) + qPow(bodypos.y - 18.7, 2));
     if(dist < 25.55) {
-        b2Vec2 gravity = b2Vec2((39.75 - bodypos.x) / dist * 140, (18.7 - bodypos.y) / dist * 140);
+        b2Vec2 gravity = b2Vec2((39.75 - bodypos.x) / dist * 100, (18.7 - bodypos.y) / dist * 100);
         body->ApplyForceToCenter(gravity, true);
     }
 }

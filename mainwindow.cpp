@@ -20,7 +20,11 @@ MainWindow::MainWindow(QWidget *parent) :
     GameItem::setGlobalSize(world_meter, world_pixel);
     MovePoint::setGlobalSize(world_meter, world_pixel);
     addStaticItems();
-    b1 = new Bird(meter_x0, meter_y0, 1.0f, &timer, world, scene, QPixmap(":/image/res/Normal_Bird.png"));
+    BIRD.push_back(new Bird(meter_x0, meter_y0, 0.8f, &timer, world, scene));
+    BIRD.push_back(new yellowBird(meter_x0, meter_y0, 0.8f, &timer, world, scene));
+    BIRD.push_back(new blackBird(meter_x0, meter_y0, 0.8f, &timer, world, scene));
+
+    BIRD.front()->setVisible(true);
 
     //bird shoot arrow
     arrow = new QGraphicsPixmapItem;
@@ -47,9 +51,17 @@ void MainWindow::closeEvent(QCloseEvent*)
 
 void MainWindow::mousePressEvent(QMouseEvent *event)
 {
-    dragstart = event->pos();
-    //qDebug() << MovePoint::pixel2meter(event->pos());
-    pressed = true;
+    Bird *b;
+    if(!BIRD.empty()) {
+        b = BIRD.front();
+        if(!b->launched) {
+            dragstart = event->pos();
+            pressed = true;
+        }
+        else {
+            b->active();
+        }
+    }
 }
 
 bool MainWindow::eventFilter(QObject*, QEvent *event)
@@ -58,15 +70,20 @@ bool MainWindow::eventFilter(QObject*, QEvent *event)
         arrow->setVisible(false);
         pressed = false;
         dragstop = static_cast<QMouseEvent*>(event)->pos();
-        b1->setLinearVelocity(b2Vec2((dragstart.x()-dragstop.x())/40,-(dragstart.y()-dragstop.y())/40));
+        if(!BIRD.empty() && !BIRD.front()->launched) {
+            BIRD.front()->setLinearVelocity(b2Vec2((dragstart.x()-dragstop.x())/40,-(dragstart.y()-dragstop.y())/40));
+            BIRD.front()->launched = true;
+        }
     }
     else if(pressed && event->type() == QEvent::MouseMove) {
-        QPointF temp = static_cast<QMouseEvent*>(event)->pos();
-        arrow->resetTransform();
-        arrow->setPos(QPointF(x_0, y_0) - QPointF(100, 9));
-        arrow->setRotation(qAtan2(temp.y()-dragstart.y(), temp.x()-dragstart.x())*180/PI);
-        arrow->setScale(qSqrt(qPow(temp.y()-dragstart.y(), 2) + qPow(temp.x()-dragstart.x(), 2))/250 + 0.75);
-        arrow->setVisible(true);
+        if(!BIRD.empty() && !BIRD.front()->launched) {
+            QPointF temp = static_cast<QMouseEvent*>(event)->pos();
+            arrow->resetTransform();
+            arrow->setPos(QPointF(x_0, y_0) - QPointF(100, 9));
+            arrow->setRotation(qAtan2(temp.y()-dragstart.y(), temp.x()-dragstart.x())*180/PI);
+            arrow->setScale(qSqrt(qPow(temp.y()-dragstart.y(), 2) + qPow(temp.x()-dragstart.x(), 2))/250 + 0.75);
+            arrow->setVisible(true);
+        }
     }
     return false;
 }
@@ -82,19 +99,17 @@ void MainWindow::addStaticItems()
 {
     Planet *p1 = new Planet(7.2f, 6.75f, 4.375f, world);
     Planet *p2 = new Planet(39.75f, 18.7f, 6.3f, world);
-    Land *l1 = new Land(40.15f, 25.4f, 2.1f, 0.01f, 0.0f, world);
-    Land *l2 = new Land(44.82f, 22.9f, 3.52f, 0.01f, -44.0f, world);
+    Land *l1 = new Land(40.15f, 25.4f, 2.1f, 0.02f, 0.0f, world);
+    Land *l2 = new Land(44.82f, 22.9f, 3.52f, 0.02f, -44.0f, world);
     Land *l3 = new Land(45.95f, 16.63f, 3.62f, 0.02f, 70.5f, world);
     Land *l4 = new Land(43.9f, 13.03f, 0.6f, 0.02f, -30.0f, world);
     Land *l5 = new Land(37.8f, 25.15f, 0.3f, 0.02f, 45.0f, world);
-    Block *B = new Block(40.0f, 26.41f, 2.0f, 2.0f, 0.0f, Block::Stone, world, scene, &timer);
-    Block *B2 = new Block(46.5f, 23.7f, 2.0f, 2.0f, -44.0f, Block::Stone, world, scene, &timer);
-    Block *B3 = new Block(40.0f, 28.41f, 2.0f, 2.0f, 0.0f, Block::Glass, world, scene, &timer);
-    Block *B4 = new Block(40.0f, 30.41f, 2.0f, 2.0f, 0.0f, Block::Wood, world, scene, &timer);
-    ITEM.push_back(B);
-    ITEM.push_back(B2);
-    ITEM.push_back(B3);
-    ITEM.push_back(B4);
+    ITEM.push_back(new Block(39.0f, 26.9f, 1.5f, 1.5f, 0.0f, Block::Wood, world, scene, &timer));
+    ITEM.push_back(new Block(40.5f, 26.9f, 1.5f, 1.5f, 0.0f, Block::Wood, world, scene, &timer));
+    ITEM.push_back(new Block(39.75f, 28.4f, 1.5f, 1.5f, 0.0f, Block::Glass, world, scene, &timer));
+    ITEM.push_back(new Block(39.75f, 29.9f, 1.5f, 1.5f, 0.0f, Block::Stone, world, scene, &timer));
+    ITEM.push_back(new Enemy(39.75f, 31.5f, 0.8f, &timer, world, scene));
+
     ITEM.push_back(p1);
     ITEM.push_back(p2);
 }
@@ -107,5 +122,10 @@ void MainWindow::deleteItem()
             delete (*it);
             ITEM.erase(it);
         }
+    }
+    if(!BIRD.empty() && BIRD.front()->toDelete) {
+        delete BIRD.front();
+        BIRD.pop_front();
+        if(!BIRD.empty()) BIRD.front()->setVisible(true);
     }
 }

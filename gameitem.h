@@ -13,6 +13,7 @@
 #include <QGraphicsScene>
 #include <QString>
 #include <QSound>
+#include <QDebug>
 
 #define PI 3.1415926
 
@@ -24,24 +25,25 @@ public:
     ~GameItem();
     static void setGlobalSize(QSizeF Meter, QSizeF Pixel);
     virtual void collision();
+    void setVisible(bool vis);
     bool toDelete;
     float HP;
     float MAX_HP;
+    bool launched;
+    bool bumped;
 
 public slots:
-    void paintPixmap();
+    virtual void paintPixmap();
 
 protected:
     b2World *world;
     b2Body *body;
     QGraphicsPixmapItem pixmap;
     QSizeF size;
+    void burstTheGravity(b2Vec2 bodypos);
 
     static QSizeF world_meter;
     static QSizeF world_pixel;
-
-private:
-    void burstTheGravity(b2Vec2 bodypos);
 };
 
 #endif // GAMEITEM_H
