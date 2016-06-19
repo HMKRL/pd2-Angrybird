@@ -2,11 +2,13 @@
 #include "movepoint.h"
 #include <QDebug>
 
-GameItem::GameItem(b2World *world):world(world), body(NULL)
+GameItem::GameItem(b2World *world, QMainWindow *p):world(world), body(NULL)
 {
     toDelete = false;
     launched = false;
     bumped = false;
+    parent = p;
+    connect(this, SIGNAL(getPoint(int)), parent, SLOT(getScore(int)));
 }
 
 GameItem::~GameItem()
@@ -25,6 +27,7 @@ void GameItem::setGlobalSize(QSizeF Meter, QSizeF Pixel)
 
 void GameItem::collision()
 {
+    emit getPoint(87);
 }
 
 void GameItem::setVisible(bool vis)
@@ -47,6 +50,7 @@ void GameItem::paintPixmap()
             toDelete = true;
         }
     }
+    //qDebug() << bodypos.x << bodypos.y;
 }
 
 void GameItem::burstTheGravity(b2Vec2 bodypos)

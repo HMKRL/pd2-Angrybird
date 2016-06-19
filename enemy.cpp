@@ -1,6 +1,6 @@
 #include "enemy.h"
 
-Enemy::Enemy(float x, float y, float radius, QTimer *timer, b2World *world, QGraphicsScene *scene):GameItem(world)
+Enemy::Enemy(float x, float y, float radius, QTimer *timer, b2World *world, QGraphicsScene *scene, QMainWindow *parent):GameItem(world, parent)
 {
     b2BodyDef bdef;
     bdef.position.Set(x, y);
@@ -30,6 +30,12 @@ Enemy::Enemy(float x, float y, float radius, QTimer *timer, b2World *world, QGra
     size.setWidth(radius*2);
 
     HP = 4000;
+    connect(this, SIGNAL(dead()), parent, SLOT(enemyKilled()));
+}
+
+Enemy::~Enemy()
+{
+    emit dead();
 }
 
 void Enemy::collision()
@@ -41,5 +47,6 @@ void Enemy::collision()
     HP = HP - Vpow2*40;
     if(HP <= 0) {
         toDelete = true;
+        emit getPoint(5000);
     }
 }

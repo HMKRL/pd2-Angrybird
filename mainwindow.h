@@ -17,6 +17,8 @@
 #include "enemy.h"
 #include "yellowbird.h"
 #include "blackbird.h"
+#include "flappybird.h"
+#include "resultdialog.h"
 
 #include <QMainWindow>
 #include <QDebug>
@@ -47,6 +49,10 @@ public:
     QVector<GameItem*> ITEM;
     QQueue<Bird*> BIRD;
 
+public slots:
+    void getScore(int score);
+    void enemyKilled();
+
 signals:
     void quitGame();
 
@@ -64,9 +70,15 @@ private:
     QPointF dragstop;
     bool pressed;
     QGraphicsPixmapItem *arrow;
-    void addStaticItems();
+    void addItems();
+    void addBird();
     ContectListener *arcane_ear;
     void deleteItem();
+    int Score;
+    bool gameStarted;
+    int enemyCount;
+    int birdCount;
+    bool ready;
 };
 
 #endif // MAINWINDOW_H

@@ -24,7 +24,9 @@ SOURCES += main.cpp\
     block.cpp \
     enemy.cpp \
     yellowbird.cpp \
-    blackbird.cpp
+    blackbird.cpp \
+    flappybird.cpp \
+    resultdialog.cpp
 
 HEADERS  += mainwindow.h \
     gameitem.h \
@@ -36,9 +38,12 @@ HEADERS  += mainwindow.h \
     block.h \
     enemy.h \
     yellowbird.h \
-    blackbird.h
+    blackbird.h \
+    flappybird.h \
+    resultdialog.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    resultdialog.ui
 
 RESOURCES += \
     resource.qrc

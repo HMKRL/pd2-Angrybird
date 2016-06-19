@@ -31,6 +31,7 @@
         <file>res/PIG.png</file>
         <file>res/yellow_bird.png</file>
         <file>res/BIRD_Black.png</file>
+        <file>res/flappy.png</file>
     </qresource>
     <qresource prefix="/animation">
         <file>res/SMOKE_CLOUD_6.png</file>
@@ -44,5 +45,9 @@
         <file>res/glass_break.wav</file>
         <file>res/wood_break.wav</file>
         <file>res/stone_break.wav</file>
+        <file>res/starburst.wav</file>
+        <file>res/hayaku.wav</file>
+        <file>res/explosion.wav</file>
+        <file>res/flap.wav</file>
     </qresource>
 </RCC>

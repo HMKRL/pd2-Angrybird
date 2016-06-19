@@ -11,7 +11,7 @@
 class Land : public GameItem
 {
 public:
-    Land(float x, float y, float w, float h, float angle, b2World *world);
+    Land(float x, float y, float w, float h, float angle, b2World *world, QMainWindow *parent);
 };
 
 #endif // LAND_H

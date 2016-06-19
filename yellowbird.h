@@ -6,7 +6,7 @@
 class yellowBird : public Bird
 {
 public:
-    yellowBird(float x, float y, float radius, QTimer *timer, b2World *world, QGraphicsScene *scene);
+    yellowBird(float x, float y, float radius, QTimer *timer, b2World *world, QGraphicsScene *scene, QMainWindow *parent);
     virtual void active();
 };
 

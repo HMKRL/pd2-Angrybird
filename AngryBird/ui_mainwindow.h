@@ -14,7 +14,9 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QGraphicsView>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLCDNumber>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QWidget>
@@ -27,6 +29,10 @@ public:
     QWidget *centralWidget;
     QGraphicsView *graphicsView;
     QLabel *label;
+    QWidget *widget;
+    QHBoxLayout *horizontalLayout;
+    QLabel *label_2;
+    QLCDNumber *lcdNumber;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -53,6 +59,33 @@ public:
         label->setObjectName(QStringLiteral("label"));
         label->setGeometry(QRect(111, 471, 32, 62));
         label->setStyleSheet(QStringLiteral("background-image: url(:/image/res/stick.png);"));
+        widget = new QWidget(centralWidget);
+        widget->setObjectName(QStringLiteral("widget"));
+        widget->setGeometry(QRect(1060, 0, 221, 41));
+        horizontalLayout = new QHBoxLayout(widget);
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        horizontalLayout->setContentsMargins(0, 0, 0, 0);
+        label_2 = new QLabel(widget);
+        label_2->setObjectName(QStringLiteral("label_2"));
+        QFont font;
+        font.setFamily(QStringLiteral("DejaVu Sans"));
+        font.setPointSize(20);
+        label_2->setFont(font);
+        label_2->setTextFormat(Qt::PlainText);
+        label_2->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout->addWidget(label_2);
+
+        lcdNumber = new QLCDNumber(widget);
+        lcdNumber->setObjectName(QStringLiteral("lcdNumber"));
+        lcdNumber->setFrameShape(QFrame::NoFrame);
+        lcdNumber->setFrameShadow(QFrame::Plain);
+        lcdNumber->setDigitCount(5);
+
+        horizontalLayout->addWidget(lcdNumber);
+
         MainWindow->setCentralWidget(centralWidget);
 
         retranslateUi(MainWindow);
@@ -62,8 +95,9 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Angry Bird", 0));
         label->setText(QString());
+        label_2->setText(QApplication::translate("MainWindow", "SCORE:", 0));
     } // retranslateUi
 
 };

@@ -1,6 +1,6 @@
 #include "bird.h"
 
-Bird::Bird(float x, float y, float radius, QTimer *timer, b2World *world, QGraphicsScene *scene):GameItem(world)
+Bird::Bird(float x, float y, float radius, QTimer *timer, b2World *world, QGraphicsScene *scene, QMainWindow *parent):GameItem(world, parent)
 {
     launched = false;
     actived = false;

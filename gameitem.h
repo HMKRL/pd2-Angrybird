@@ -14,6 +14,7 @@
 #include <QString>
 #include <QSound>
 #include <QDebug>
+#include <QMainWindow>
 
 #define PI 3.1415926
 
@@ -21,8 +22,8 @@ class GameItem : public QObject
 {
     Q_OBJECT
 public:
-    GameItem(b2World *world);
-    ~GameItem();
+    GameItem(b2World *world, QMainWindow *p);
+    virtual ~GameItem();
     static void setGlobalSize(QSizeF Meter, QSizeF Pixel);
     virtual void collision();
     void setVisible(bool vis);
@@ -35,12 +36,17 @@ public:
 public slots:
     virtual void paintPixmap();
 
+signals:
+    void getPoint(int);
+    void dead();
+
 protected:
     b2World *world;
     b2Body *body;
     QGraphicsPixmapItem pixmap;
     QSizeF size;
     void burstTheGravity(b2Vec2 bodypos);
+    QMainWindow *parent;
 
     static QSizeF world_meter;
     static QSizeF world_pixel;

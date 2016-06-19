@@ -1,6 +1,6 @@
 #include "land.h"
 
-Land::Land(float x, float y, float w, float h, float angle, b2World *world):GameItem(world)
+Land::Land(float x, float y, float w, float h, float angle, b2World *world, QMainWindow *parent):GameItem(world, parent)
 {
     size = QSizeF(w, h);
 

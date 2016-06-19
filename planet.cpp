@@ -1,6 +1,6 @@
 #include "planet.h"
 
-Planet::Planet(float x, float y, float radius, b2World *world):GameItem(world)
+Planet::Planet(float x, float y, float radius, b2World *world, QMainWindow *parent):GameItem(world, parent)
 {
     b2BodyDef bdef;
     bdef.position.Set(x, y);

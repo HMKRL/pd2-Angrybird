@@ -1,6 +1,6 @@
 #include "block.h"
 
-Block::Block(float x, float y, float w, float h, float angle, int type, b2World *world, QGraphicsScene *scene, QTimer *timer):GameItem(world)
+Block::Block(float x, float y, float w, float h, float angle, int type, b2World *world, QGraphicsScene *scene, QTimer *timer, QMainWindow *parent):GameItem(world, parent)
 {
     Type = type;
     if(Type == Wood) {
@@ -52,6 +52,7 @@ Block::Block(float x, float y, float w, float h, float angle, int type, b2World 
 
 void Block::collision()
 {
+    emit getPoint(139);
     bumped = true;
     b2Vec2 speed = body->GetLinearVelocity();
     float Vpow2 = qPow(speed.x, 2) + qPow(speed.y, 2);
@@ -60,6 +61,7 @@ void Block::collision()
     if(HP <= 0) {
         toDelete = true;
         breakSound->play();
+        emit getPoint(502);
     }
 
     if(HP / MAX_HP < 0.2)

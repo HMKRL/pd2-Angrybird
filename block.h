@@ -11,7 +11,7 @@
 class Block : public GameItem
 {
 public:
-    Block(float x, float y, float w, float h, float angle, int type, b2World *world, QGraphicsScene *scene, QTimer *timer);
+    Block(float x, float y, float w, float h, float angle, int type, b2World *world, QGraphicsScene *scene, QTimer *timer, QMainWindow *parent);
     virtual void collision();
     enum {Wood, Glass, Stone};
 
