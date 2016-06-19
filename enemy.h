@@ -6,7 +6,7 @@
 class Enemy : public GameItem
 {
 public:
-    Enemy(float x, float y, float radius, QTimer *timer, b2World *world, QGraphicsScene *scene, QMainWindow *parent);
+    Enemy(float x, float y, float radius, float angle, QTimer *timer, b2World *world, QGraphicsScene *scene, QMainWindow *parent);
     ~Enemy();
     virtual void collision();
 };

@@ -26,7 +26,8 @@ SOURCES += main.cpp\
     yellowbird.cpp \
     blackbird.cpp \
     flappybird.cpp \
-    resultdialog.cpp
+    resultdialog.cpp \
+    tnt.cpp
 
 HEADERS  += mainwindow.h \
     gameitem.h \
@@ -40,7 +41,8 @@ HEADERS  += mainwindow.h \
     yellowbird.h \
     blackbird.h \
     flappybird.h \
-    resultdialog.h
+    resultdialog.h \
+    tnt.h
 
 FORMS    += mainwindow.ui \
     resultdialog.ui

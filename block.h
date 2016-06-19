@@ -1,9 +1,9 @@
 #ifndef BLOCK_H
 #define BLOCK_H
 
-#define GLASS_HP 8000
-#define WOOD_HP 12000
-#define ROCK_HP 20000
+#define GLASS_HP 6000
+#define WOOD_HP 8000
+#define ROCK_HP 10000
 
 #include "gameitem.h"
 #include <QDebug>

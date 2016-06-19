@@ -19,6 +19,7 @@
 #include "blackbird.h"
 #include "flappybird.h"
 #include "resultdialog.h"
+#include "tnt.h"
 
 #include <QMainWindow>
 #include <QDebug>

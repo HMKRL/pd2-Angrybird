@@ -31,7 +31,7 @@ MainWindow::MainWindow(QWidget *parent) :
     scene->addItem(arrow);
 
     Score = 0;
-    enemyCount = 1;
+    enemyCount = 2;
     birdCount = 4;
     gameStarted = false;
     connect(&timer,SIGNAL(timeout()),this,SLOT(tick()));
@@ -51,8 +51,8 @@ void MainWindow::closeEvent(QCloseEvent*)
 
 void MainWindow::mousePressEvent(QMouseEvent *event)
 {
-    QPointF Pos = MovePoint::pixel2meter(event->pos());
-    //ITEM.push_back(new Block(Pos.x(), Pos.y(), 4.0f, 0.4f, -44.14f, Block::Wood, world, scene, &timer, this));
+    //QPointF Pos = MovePoint::pixel2meter(event->pos());
+    //ITEM.push_back(new TNT(Pos.x(), Pos.y(), 1.5f, 1.5f, -44.14f, world, scene, &timer, this));
     Bird *b;
     if(!BIRD.empty()) {
         b = BIRD.front();
@@ -110,7 +110,7 @@ void MainWindow::tick()
     deleteItem();
     world->Step(1.0/60.0, 6, 2);
     scene->update();
-    /*if((birdCount == 0 || enemyCount == 0) && ready) {
+    if((birdCount == 0 || enemyCount == 0) && ready) {
         resultDialog *res = new resultDialog(Score, enemyCount, birdCount);
         res->show();
         if(res->exec()) {
@@ -125,11 +125,11 @@ void MainWindow::tick()
             addItems();
             addBird();
             birdCount = 4;
-            enemyCount = 1;
+            enemyCount = 2;
             Score = 0;
         }
         else this->close();
-    }*/
+    }
 }
 
 void MainWindow::addItems()
@@ -141,15 +141,20 @@ void MainWindow::addItems()
     ITEM.push_back(new Block(39.75f, 29.9f, 1.5f, 1.5f, 0.0f, Block::Stone, world, scene, &timer, this));
     //chunk 2
         //layer 1
-    ITEM.push_back(new Block(43.44f, 25.35f, 1.5f, 1.5f, -44.14f, Block::Wood, world, scene, &timer, this));
-    ITEM.push_back(new Block(46.69f, 22.19f, 1.5f, 1.5f, -44.14f, Block::Wood, world, scene, &timer, this));
+    ITEM.push_back(new Block(48.37f, 27.47f, 1.5f, 1.5f, -44.14f, Block::Glass, world, scene, &timer, this));
+    ITEM.push_back(new Block(46.69f, 22.19f, 1.5f, 1.5f, -44.14f, Block::Glass, world, scene, &timer, this));
+    ITEM.push_back(new Enemy(45.57f, 24.29f, 1.2f, -44.14f, &timer, world, scene, this));
         //layer 2
-    ITEM.push_back(new Block(44.49f, 26.42f, 1.5f, 1.5f, -44.14f, Block::Wood, world, scene, &timer, this));
-    ITEM.push_back(new Block(47.73f, 23.29f, 1.5f, 1.5f, -44.14f, Block::Wood, world, scene, &timer, this));
+    ITEM.push_back(new Block(44.49f, 26.42f, 1.5f, 1.5f, -44.14f, Block::Glass, world, scene, &timer, this));
+    ITEM.push_back(new Block(47.73f, 23.29f, 1.5f, 1.5f, -44.14f, Block::Glass, world, scene, &timer, this));
         //rod
     ITEM.push_back(new Block(46.76f, 25.56f, 4.0f, 0.4f, -44.14f, Block::Wood, world, scene, &timer, this));
+    ITEM.push_back(new Block(48.22f, 25.51f, 1.5f, 1.5f, -44.14f, Block::Stone, world, scene, &timer, this));
+    ITEM.push_back(new Block(46.5f, 27.15f, 1.5f, 1.5f, -44.14f, Block::Stone, world, scene, &timer, this));
+        //TNT
+    ITEM.push_back(new TNT(43.44f, 25.35f, 1.5f, 1.5f, -44.14f, world, scene, &timer, this));
 
-    ITEM.push_back(new Enemy(39.75f, 31.5f, 0.8f, &timer, world, scene, this));
+    ITEM.push_back(new Enemy(39.75f, 31.5f, 0.8f, 0.0f, &timer, world, scene, this));
     ITEM.push_back(new Planet(7.2f, 6.75f, 4.375f, world, this));
     ITEM.push_back(new Planet(39.75f, 18.7f, 6.3f, world, this));
     ITEM.push_back(new Land(40.15f, 25.4f, 2.1f, 0.02f, 0.0f, world, this));
